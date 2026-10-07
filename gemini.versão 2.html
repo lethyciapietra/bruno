@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New dawn - A new day can begin</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts: Nunito e Plus Jakarta Sans para um tom acolhedor e legível -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dawn: {
+              50: '#fffef2',
+              100: '#fffab8',
+              200: '#fffa85',
+              300: '#fff147',
+              400: '#ffd814',
+              500: '#eab308',
+              600: '#ca8a04',
+              700: '#a16207',
+              800: '#854d0e',
+              900: '#713f12',
+            },
+            warm: {
+              50: '#fdfbf7',
+              100: '#fbf7ee',
+              200: '#f7eee0',
+              300: '#f0dfc4',
+              400: '#e5c99b',
+              500: '#d9ab6a',
+            }
+          },
+          fontFamily: {
+            sans: ['"Nunito"', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 10px 30px -5px rgba(234, 179, 8, 0.15)',
+            'inner-soft': 'inset 0 2px 4px 0 rgba(161, 98, 7, 0.06)',
+            'glow': '0 0 20px rgba(254, 240, 138, 0.6)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #fdfbf7;
+      color: #543710;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fbf7ee;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ffd814;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ca8a04;
+    }
+
+    /* Animação de respiração guiada 4-7-8 */
+    @keyframes breatheCycle {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      35% { transform: scale(1.6); opacity: 1; }  /* Inspira 4s */
+      45% { transform: scale(1.6); opacity: 1; }  /* Segura 7s */
+      90% { transform: scale(1); opacity: 0.8; }   /* Expira 8s */
+    }
+
+    .breathing-circle {
+      animation: breatheCycle 19s infinite ease-in-out;
+    }
+
+    /* Transição suave entre abas */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Estilo para Canvas de Bolhas */
+    #bubble-canvas {
+      touch-action: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-warm-50 text-dawn-900 selection:bg-dawn-200">
+
+  <!-- Cabeçalho Principal -->
+  <header class="sticky top-0 z-40 bg-warm-50/90 backdrop-blur-md border-b border-dawn-200/80 transition-all">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-dawn-400 to-dawn-200 flex items-center justify-center shadow-soft text-dawn-900">
+          <i data-lucide="sun-medium" class="w-6 h-6 animate-spin" style="animation-duration: 20s;"></i>
+        </div>
+        <div>
+          <h1 class="font-black text-xl text-dawn-900 tracking-tight leading-none">New dawn</h1>
+          <p class="text-xs text-dawn-700/80 font-semibold italic">A new day can begin 🌅</p>
+        </div>
+      </div>
+      
+      <div class="hidden sm:flex items-center gap-2 bg-warm-100 px-3 py-1.5 rounded-2xl border border-dawn-200/60 shadow-xs">
+        <i data-lucide="sparkles" class="w-4 h-4 text-dawn-600"></i>
+        <span id="header-greeting" class="text-xs font-bold text-dawn-800">
+          Você não está só
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo das 6 Seções da Plataforma -->
+  <main class="max-w-4xl w-full mx-auto px-4 py-6 flex-1 mb-20 sm:mb-10">
+
+    <!-- ==================== TELA 1: COMO VOCÊ ESTÁ HOJE? ==================== -->
+    <section id="screen-mood" class="tab-content active space-y-6">
+      <div class="bg-gradient-to-br from-dawn-100/70 via-warm-100 to-warm-50 rounded-3xl p-6 sm:p-8 border border-dawn-200/80 shadow-soft">
+        <div class="max-w-lg mx-auto text-center space-y-3">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-dawn-200 text-dawn-900 text-xs font-extrabold uppercase tracking-wider">
+            Momento Presente
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-dawn-900">Como você está se sentindo hoje?</h2>
+          <p class="text-dawn-800/80 text-sm leading-relaxed">
+            Seus sentimentos são bem-vindos aqui. Escolha como se sente para registrar o seu dia com carinho.
+          </p>
+        </div>
+
+        <!-- Seletor de Emoções -->
+        <div class="mt-8 grid grid-cols-2 sm:grid-cols-6 gap-3 max-w-2xl mx-auto" id="mood-selector">
+          <button data-mood="Triste/Mal" data-emoji="🌧️" class="mood-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-dawn-200/80 bg-white/80 hover:bg-dawn-100 hover:border-dawn-400 transition-all text-center group cursor-pointer shadow-xs">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🌧️</span>
+            <span class="text-xs font-bold text-dawn-900">Triste / Mal</span>
+          </button>
+          <button data-mood="Ansioso(a)" data-emoji="🌪️" class="mood-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-dawn-200/80 bg-white/80 hover:bg-dawn-100 hover:border-dawn-400 transition-all text-center group cursor-pointer shadow-xs">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🌪️</span>
+            <span class="text-xs font-bold text-dawn-900">Ansioso(a)</span>
+          </button>
+          <button data-mood="Cansado(a)" data-emoji="🔋" class="mood-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-dawn-200/80 bg-white/80 hover:bg-dawn-100 hover:border-dawn-400 transition-all text-center group cursor-pointer shadow-xs">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🔋</span>
+            <span class="text-xs font-bold text-dawn-900">Cansado(a)</span>
+          </button>
+          <button data-mood="Neutro" data-emoji="☁️" class="mood-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-dawn-200/80 bg-white/80 hover:bg-dawn-100 hover:border-dawn-400 transition-all text-center group cursor-pointer shadow-xs">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">☁️</span>
+            <span class="text-xs font-bold text-dawn-900">Neutro</span>
+          </button>
+          <button data-mood="Calmo(a)" data-emoji="🌱" class="mood-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-dawn-200/80 bg-white/80 hover:bg-dawn-100 hover:border-dawn-400 transition-all text-center group cursor-pointer shadow-xs">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">🌱</span>
+            <span class="text-xs font-bold text-dawn-900">Calmo(a)</span>
+          </button>
+          <button data-mood="Esperançoso(a)" data-emoji="☀️" class="mood-btn flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-dawn-200/80 bg-white/80 hover:bg-dawn-100 hover:border-dawn-400 transition-all text-center group cursor-pointer shadow-xs">
+            <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">☀️</span>
+            <span class="text-xs font-bold text-dawn-900">Esperançoso</span>
+          </button>
+        </div>
+
+        <!-- Campo Opcional de Relato -->
+        <div class="mt-6 max-w-2xl mx-auto space-y-3">
+          <label for="mood-note" class="block text-sm font-bold text-dawn-900">
+            Quer escrever um pouco sobre o que aconteceu hoje? (Opcional)
+          </label>
+          <textarea id="mood-note" rows="3" placeholder="Escreva o que quiser, no seu próprio ritmo..." class="w-full p-4 rounded-2xl border border-dawn-300 focus:border-dawn-500 focus:ring-2 focus:ring-dawn-200 bg-white/90 text-dawn-900 placeholder-dawn-800/40 outline-none transition-all resize-none shadow-inner-soft text-sm leading-relaxed"></textarea>
+          
+          <button id="save-mood-btn" class="w-full sm:w-auto px-6 py-3.5 bg-gradient-to-r from-dawn-400 to-dawn-500 hover:from-dawn-500 hover:to-dawn-600 text-dawn-950 font-extrabold rounded-2xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer">
+            <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+            Salvar meu momento de hoje
+          </button>
+        </div>
+      </div>
+
+      <!-- Feedback de Confirmação -->
+      <div id="mood-saved-msg" class="hidden bg-dawn-100/90 border border-dawn-300 text-dawn-900 p-4 rounded-2xl text-center shadow-soft flex items-center justify-center gap-2">
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-dawn-600"></i>
+        <span class="font-bold text-sm">Seu momento foi guardado no calendário! Um dia de cada vez. 💛</span>
+      </div>
+    </section>
+
+    <!-- ==================== TELA 2: MISSÃO DO DIA ==================== -->
+    <section id="screen-mission" class="tab-content space-y-6">
+      <div class="bg-gradient-to-br from-warm-100 via-dawn-100/50 to-warm-50 rounded-3xl p-6 sm:p-8 border border-dawn-200/80 shadow-soft text-center max-w-2xl mx-auto space-y-6">
+        <div>
+          <span class="inline-block px-3.5 py-1 rounded-full bg-dawn-200 text-dawn-900 text-xs font-extrabold uppercase tracking-wider">
+            Autocuidado Ativo
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-dawn-900 mt-2">Sua Missão Acolhedora</h2>
+          <p class="text-dawn-800/80 text-sm mt-1">Pequenos passos geram grande alívio. Escolha uma tarefa simples para agora.</p>
+        </div>
+
+        <div class="p-8 bg-white/90 rounded-3xl border border-dawn-200 shadow-inner-soft flex flex-col items-center justify-center min-h-[200px] space-y-4">
+          <div id="mission-icon" class="text-6xl animate-bounce" style="animation-duration: 3s;">💧</div>
+          <h3 id="mission-title" class="text-xl font-bold text-dawn-900">Beber um copo d'água bem fresco</h3>
+          <p id="mission-desc" class="text-dawn-800 text-sm max-w-md leading-relaxed">
+            Sinta a água hidratando seu corpo e tire 60 segundos para desacelerar seus pensamentos.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button id="complete-mission-btn" class="w-full sm:w-auto px-6 py-3.5 bg-dawn-400 hover:bg-dawn-500 text-dawn-950 font-extrabold rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            Concluir Esta Missão
+          </button>
+          
+          <button id="random-mission-btn" class="w-full sm:w-auto px-6 py-3.5 bg-warm-200/80 hover:bg-warm-200 text-dawn-900 font-bold rounded-2xl border border-dawn-300/80 transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <i data-lucide="shuffle" class="w-4 h-4"></i>
+            Quero Outra Sugestão
+          </button>
+        </div>
+
+        <div id="mission-complete-msg" class="hidden p-4 bg-dawn-200/80 border border-dawn-300 text-dawn-950 rounded-2xl text-sm font-extrabold flex items-center justify-center gap-2 shadow-xs">
+          <span>✨ Missão concluída! Você cuidou de si mesmo(a) hoje e isso é valioso. ✨</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TELA 3: DIÁRIO DIGITAL ==================== -->
+    <section id="screen-journal" class="tab-content space-y-6">
+      <div class="bg-gradient-to-br from-dawn-50 via-warm-100 to-warm-50 rounded-3xl p-6 sm:p-8 border border-dawn-200/80 shadow-soft">
+        <div class="max-w-2xl mx-auto space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="px-3.5 py-1 rounded-full bg-dawn-200 text-dawn-900 text-xs font-extrabold uppercase tracking-wider">
+                🔒 Espaço Sigiloso
+              </span>
+              <h2 class="text-2xl font-extrabold text-dawn-900 mt-1">Seu Diário Pessoal</h2>
+            </div>
+            <i data-lucide="notebook" class="w-8 h-8 text-dawn-500"></i>
+          </div>
+          <p class="text-dawn-800/80 text-sm">
+            Seus registros ficam armazenados estritamente no seu dispositivo. Escreva livremente.
+          </p>
+
+          <!-- Formulário do Diário -->
+          <div class="space-y-3 bg-white/90 p-5 rounded-3xl border border-dawn-200 shadow-soft">
+            <input id="journal-title" type="text" placeholder="Título da sua anotação (ex: Reflexões do amanhecer)" class="w-full p-3.5 rounded-xl border border-dawn-200 bg-warm-50/50 text-dawn-900 font-bold placeholder-dawn-800/40 focus:outline-none focus:border-dawn-400 text-sm">
+            
+            <textarea id="journal-content" rows="5" placeholder="Escreva o que está no seu coração... desabafe sem medo." class="w-full p-4 rounded-xl border border-dawn-200 bg-warm-50/30 text-dawn-900 placeholder-dawn-800/40 focus:outline-none focus:border-dawn-400 text-sm leading-relaxed resize-none"></textarea>
+            
+            <button id="save-journal-btn" class="w-full py-3.5 bg-dawn-400 hover:bg-dawn-500 text-dawn-950 font-extrabold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="save" class="w-5 h-5"></i>
+              Guardar Nota Privada
+            </button>
+          </div>
+        </div>
+
+        <!-- Lista e Busca de Notas -->
+        <div class="max-w-2xl mx-auto mt-8 space-y-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <h3 class="text-lg font-bold text-dawn-900 flex items-center gap-2">
+              <i data-lucide="book-heart" class="w-5 h-5 text-dawn-600"></i>
+              Suas Páginas Guardadas
+            </h3>
+            
+            <div class="relative w-full sm:w-64">
+              <input id="search-journal" type="text" placeholder="Buscar nas notas..." class="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-dawn-200 bg-white/90 text-dawn-900 focus:outline-none focus:border-dawn-400">
+              <i data-lucide="search" class="w-4 h-4 text-dawn-600 absolute left-2.5 top-2"></i>
+            </div>
+          </div>
+
+          <div id="journal-list" class="space-y-3">
+            <!-- Páginas injetadas via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TELA 4: MINI-JOGOS RELAXANTES ==================== -->
+    <section id="screen-games" class="tab-content space-y-6">
+      <div class="bg-gradient-to-br from-dawn-100/80 via-warm-100 to-warm-50 rounded-3xl p-6 sm:p-8 border border-dawn-200/80 shadow-soft">
+        <div class="text-center max-w-lg mx-auto space-y-2 mb-6">
+          <span class="px-3.5 py-1 rounded-full bg-dawn-200 text-dawn-900 text-xs font-extrabold uppercase tracking-wider">
+            Distração Eficaz & Relaxamento
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-dawn-900">Jogos do Alvorecer</h2>
+          <p class="text-dawn-800/80 text-sm">Mini-jogos envolventes para desacelerar o pensamento e acalmar o peito.</p>
+        </div>
+
+        <!-- Seletor de Jogos (Abas) -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6" id="games-nav">
+          <button data-game="memory" class="game-nav-btn active px-4 py-2.5 rounded-2xl bg-dawn-400 text-dawn-950 font-extrabold text-xs shadow-xs transition-all flex items-center gap-2 cursor-pointer">
+            <i data-lucide="grid-3x3" class="w-4 h-4"></i> Memória Emocional
+          </button>
+          <button data-game="puzzle" class="game-nav-btn px-4 py-2.5 rounded-2xl bg-warm-200 text-dawn-900 font-bold text-xs hover:bg-dawn-200 transition-all flex items-center gap-2 cursor-pointer">
+            <i data-lucide="puzzle" class="w-4 h-4"></i> Quebra-Cabeça
+          </button>
+          <button data-game="bubbles" class="game-nav-btn px-4 py-2.5 rounded-2xl bg-warm-200 text-dawn-900 font-bold text-xs hover:bg-dawn-200 transition-all flex items-center gap-2 cursor-pointer">
+            <i data-lucide="sparkles" class="w-4 h-4"></i> Estourar Bolhas
+          </button>
+          <button data-game="garden" class="game-nav-btn px-4 py-2.5 rounded-2xl bg-warm-200 text-dawn-900 font-bold text-xs hover:bg-dawn-200 transition-all flex items-center gap-2 cursor-pointer">
+            <i data-lucide="flower-2" class="w-4 h-4"></i> Jardim do Alvorecer
+          </button>
+        </div>
+
+        <!-- JOGO 1: Memória Emocional -->
+        <div id="game-view-memory" class="game-container max-w-md mx-auto bg-white/90 p-6 rounded-3xl border border-dawn-200 shadow-inner-soft space-y-4">
+          <div class="flex items-center justify-between text-xs font-bold text-dawn-900 bg-warm-100 p-3 rounded-2xl border border-dawn-200">
+            <span>Jogadas: <strong id="mem-moves">0</strong></span>
+            <span>Tempo: <strong id="mem-timer">00:00</strong></span>
+            <button id="reset-mem-btn" class="px-3 py-1 bg-dawn-300 hover:bg-dawn-400 text-dawn-950 rounded-lg text-xs font-bold transition-all">Reiniciar</button>
+          </div>
+
+          <div id="mem-grid" class="grid grid-cols-4 gap-2.5">
+            <!-- Cartões via JS -->
+          </div>
+          <p id="mem-win-msg" class="hidden text-center text-xs font-extrabold text-emerald-800 bg-emerald-100 p-3 rounded-xl">✨ Parabéns! Você concluiu o jogo da memória com muita calma! ✨</p>
+        </div>
+
+        <!-- JOGO 2: Quebra-Cabeça de Deslizamento (Sliding Puzzle) -->
+        <div id="game-view-puzzle" class="game-container hidden max-w-md mx-auto bg-white/90 p-6 rounded-3xl border border-dawn-200 shadow-inner-soft space-y-4 text-center">
+          <div class="flex items-center justify-between gap-2 text-xs font-bold">
+            <span class="text-dawn-800">Monte a imagem do nascer do sol</span>
+            <button id="reset-puzzle-btn" class="px-3 py-1 bg-dawn-300 hover:bg-dawn-400 text-dawn-950 rounded-lg text-xs font-bold transition-all">Embaralhar</button>
+          </div>
+
+          <div id="puzzle-board" class="grid grid-cols-3 gap-1.5 w-64 h-64 mx-auto bg-dawn-200 p-1.5 rounded-2xl border-2 border-dawn-300 shadow-inner">
+            <!-- Peças via JS -->
+          </div>
+
+          <p id="puzzle-win-msg" class="hidden text-xs font-extrabold text-emerald-800 bg-emerald-100 p-3 rounded-xl">🌅 Lindo! Você organizou a luz do novo amanhecer!</p>
+        </div>
+
+        <!-- JOGO 3: Estourar Bolhas de Sabão Relaxantes (Canvas) -->
+        <div id="game-view-bubbles" class="game-container hidden max-w-md mx-auto bg-white/90 p-6 rounded-3xl border border-dawn-200 shadow-inner-soft space-y-3 text-center">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-dawn-900">Toque / Clique nas bolhas para estourá-las 🫧</span>
+            <span class="text-xs font-bold text-dawn-800">Estouradas: <strong id="bubbles-popped-count">0</strong></span>
+          </div>
+
+          <div class="relative w-full h-72 rounded-2xl overflow-hidden bg-gradient-to-b from-amber-50 to-amber-100/60 border border-dawn-200 shadow-inner">
+            <canvas id="bubble-canvas" class="w-full h-full"></canvas>
+          </div>
+
+          <p class="text-[11px] text-dawn-800/80 italic">As bolhas flutuam infinitamente para proporcionar um momento de descompressão contínua.</p>
+        </div>
+
+        <!-- JOGO 4: Jardim do Alvorecer / Cuide das Flores -->
+        <div id="game-view-garden" class="game-container hidden max-w-md mx-auto bg-white/90 p-6 rounded-3xl border border-dawn-200 shadow-inner-soft space-y-4 text-center">
+          <div>
+            <h4 class="text-sm font-extrabold text-dawn-900">Cultive seu Jardim de Esperança 🌻</h4>
+            <p class="text-xs text-dawn-800/80">Plante sementes, regue com carinho e receba mensagens reconfortantes.</p>
+          </div>
+
+          <div id="garden-plots" class="grid grid-cols-3 gap-3">
+            <!-- canteiros de flores JS -->
+          </div>
+
+          <div id="garden-quote-box" class="min-h-[50px] p-3 rounded-2xl bg-dawn-100/80 border border-dawn-300 text-xs font-bold text-dawn-900 flex items-center justify-center italic">
+            Clique em um canteiro para plantar sua primeira semente! 🌱
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TELA 5: EVOLUÇÃO E CALENDÁRIO ==================== -->
+    <section id="screen-calendar" class="tab-content space-y-6">
+      <div class="bg-gradient-to-br from-warm-100 via-dawn-100/60 to-warm-50 rounded-3xl p-6 sm:p-8 border border-dawn-200/80 shadow-soft">
+        <div class="text-center max-w-xl mx-auto space-y-2 mb-6">
+          <span class="px-3.5 py-1 rounded-full bg-dawn-200 text-dawn-900 text-xs font-extrabold uppercase tracking-wider">
+            Sua Trilha Silenciosa
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-dawn-900">Calendário de Presença</h2>
+          <p class="text-dawn-800/80 text-sm">
+            Sem pontuações ou cobranças. Cada ícone marca um dia em que você se acolheu e esteve presente.
+          </p>
+        </div>
+
+        <div class="max-w-md mx-auto bg-white/90 p-6 rounded-3xl border border-dawn-200 shadow-soft">
+          <div class="flex items-center justify-between mb-5">
+            <h3 id="calendar-month-year" class="font-extrabold text-dawn-900 text-base capitalize">
+              <!-- Mês e Ano JS -->
+            </h3>
+            <span class="text-xs text-dawn-800 bg-dawn-100 px-3 py-1 rounded-full font-bold border border-dawn-200">
+              Registros do Mês ☀️
+            </span>
+          </div>
+
+          <!-- Cabeçalho dos dias -->
+          <div class="grid grid-cols-7 gap-1 text-center font-extrabold text-xs text-dawn-800/60 mb-3">
+            <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+          </div>
+
+          <!-- Grade do Calendário -->
+          <div id="calendar-days" class="grid grid-cols-7 gap-1.5 text-center text-sm font-semibold">
+            <!-- Dias gerados via JS -->
+          </div>
+        </div>
+
+        <div class="max-w-md mx-auto mt-4 bg-dawn-100/70 border border-dawn-200 rounded-2xl p-4 text-center">
+          <p id="presence-summary" class="text-xs text-dawn-900 font-bold">
+            Carregando seu histórico de presença...
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TELA 6: ÁREA DE APOIO E EMERGÊNCIA ==================== -->
+    <section id="screen-support" class="tab-content space-y-6">
+      
+      <!-- Frase em Destaque Emocional -->
+      <div class="bg-gradient-to-r from-dawn-400 via-dawn-300 to-dawn-200 rounded-3xl p-6 sm:p-8 text-center text-dawn-950 shadow-soft relative overflow-hidden">
+        <div class="relative z-10 max-w-xl mx-auto space-y-2">
+          <i data-lucide="sun" class="w-10 h-10 mx-auto text-dawn-900/80 mb-2"></i>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
+            "You don't have to go through this alone"
+          </h2>
+          <p class="text-sm font-bold text-dawn-900/90">
+            Pedir ajuda é um ato de coragem e amor-próprio. Há pessoas prontas para te ouvir agora.
+          </p>
+        </div>
+      </div>
+
+      <!-- ÁREA 1: Precisa conversar com alguém? (CVV 188) -->
+      <div class="bg-gradient-to-br from-amber-50 to-warm-100 rounded-3xl p-6 border-2 border-dawn-300 shadow-soft space-y-4">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-dawn-400 flex items-center justify-center text-dawn-950 shrink-0 font-black text-xl shadow-xs">
+            188
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-dawn-950">Precisa conversar com alguém?</h3>
+            <p class="text-xs sm:text-sm text-dawn-800 leading-relaxed mt-1">
+              O <strong>CVV (Centro de Valorização da Vida)</strong> oferece apoio emocional gratuito e sigiloso pelo telefone <strong>188</strong>, disponível 24 horas por dia.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+          <a href="tel:188" class="flex-1 py-3.5 px-4 bg-dawn-400 hover:bg-dawn-500 text-dawn-950 font-extrabold rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
+            <i data-lucide="phone-call" class="w-5 h-5"></i>
+            Ligar para o 188
+          </a>
+          <a href="https://www.cvv.org.br/chat/" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-4 bg-white hover:bg-warm-100 text-dawn-900 font-bold border border-dawn-300 rounded-2xl transition-all flex items-center justify-center gap-2">
+            <i data-lucide="message-square" class="w-5 h-5 text-dawn-600"></i>
+            Conversar via Chat Online
+          </a>
+        </div>
+      </div>
+
+      <!-- ÁREA 2: Quero falar com alguém de confiança -->
+      <div class="bg-white/90 rounded-3xl p-6 border border-dawn-200 shadow-soft space-y-4">
+        <div>
+          <h3 class="text-lg font-bold text-dawn-950 flex items-center gap-2">
+            <i data-lucide="users" class="w-5 h-5 text-dawn-600"></i>
+            Quero Falar com Alguém de Confiança
+          </h3>
+          <p class="text-xs text-dawn-800">Cadastre previamente contatos próximos (mãe, pai, irmão, melhor amigo) para discar com facilidade.</p>
+        </div>
+
+        <!-- Formulário de Contato -->
+        <form id="add-contact-form" class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2">
+          <input id="contact-name" type="text" placeholder="Nome (Ex: Mãe, Lucas)" required class="p-3 text-xs sm:text-sm rounded-xl border border-dawn-200 bg-warm-50 focus:outline-none focus:border-dawn-400">
+          <input id="contact-phone" type="tel" placeholder="DDD + Telefone/WhatsApp" required class="p-3 text-xs sm:text-sm rounded-xl border border-dawn-200 bg-warm-50 focus:outline-none focus:border-dawn-400">
+          <button type="submit" class="py-3 px-4 bg-dawn-300 hover:bg-dawn-400 text-dawn-950 font-extrabold rounded-xl text-xs sm:text-sm transition-all flex items-center justify-center gap-1 cursor-pointer">
+            <i data-lucide="user-plus" class="w-4 h-4"></i> Cadastrar
+          </button>
+        </form>
+
+        <div id="trusted-contacts-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <!-- Lista de Contatos via JS -->
+        </div>
+      </div>
+
+      <!-- ÁREA 3: Preciso me acalmar agora -->
+      <div class="bg-gradient-to-br from-dawn-100/70 via-warm-100 to-warm-50 rounded-3xl p-6 border border-dawn-200 shadow-soft space-y-6">
+        <div>
+          <h3 class="text-lg font-bold text-dawn-950 flex items-center gap-2">
+            <i data-lucide="wind" class="w-5 h-5 text-dawn-600"></i>
+            Preciso Me Acalmar Agora
+          </h3>
+          <p class="text-xs text-dawn-800">Técnicas imediatas de desaceleração e reconexão com o momento presente.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Respiração Guiada 4-7-8 -->
+          <div class="bg-white/90 p-5 rounded-2xl border border-dawn-200 space-y-4 text-center">
+            <h4 class="font-bold text-dawn-950 text-sm">Respiração Guiada (4-7-8)</h4>
+            <div class="relative w-32 h-32 mx-auto flex items-center justify-center">
+              <div class="breathing-circle absolute w-24 h-24 rounded-full bg-dawn-300/70 border-2 border-dawn-400 shadow-glow"></div>
+              <span id="breath-status" class="relative z-10 font-black text-xs text-dawn-950 px-2">Inspire...</span>
+            </div>
+            <p class="text-xs text-dawn-800">Inspire pelo nariz (4s), segure o ar (7s) e expire suavemente pela boca (8s).</p>
+          </div>
+
+          <!-- Grounding 5-4-3-2-1 -->
+          <div class="bg-white/90 p-5 rounded-2xl border border-dawn-200 space-y-3">
+            <h4 class="font-bold text-dawn-950 text-sm text-center">Ancoragem no Presente (Grounding)</h4>
+            
+            <div id="grounding-step" class="p-3 bg-warm-100 rounded-xl border border-dawn-200 text-center space-y-1">
+              <span id="grounding-num" class="text-2xl font-black text-dawn-600">5</span>
+              <p id="grounding-text" class="text-xs font-bold text-dawn-950">Coisas que você consegue VER no seu ambiente</p>
+            </div>
+
+            <button id="next-grounding-btn" class="w-full py-2.5 bg-dawn-200 hover:bg-dawn-300 text-dawn-950 text-xs font-bold rounded-xl transition-all cursor-pointer">
+              Avançar Passo de Ancoragem ➔
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Barra de Navegação Inferior -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-dawn-200 shadow-lg">
+    <div class="max-w-2xl mx-auto px-2 py-2 flex items-center justify-around">
+      
+      <button data-tab="screen-mood" class="nav-btn active flex flex-col items-center gap-1 p-2 rounded-xl text-dawn-800 hover:text-dawn-950 transition-all cursor-pointer">
+        <i data-lucide="smile" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Hoje</span>
+      </button>
+
+      <button data-tab="screen-mission" class="nav-btn flex flex-col items-center gap-1 p-2 rounded-xl text-dawn-800 hover:text-dawn-950 transition-all cursor-pointer">
+        <i data-lucide="compass" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Missão</span>
+      </button>
+
+      <button data-tab="screen-journal" class="nav-btn flex flex-col items-center gap-1 p-2 rounded-xl text-dawn-800 hover:text-dawn-950 transition-all cursor-pointer">
+        <i data-lucide="pen-tool" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Diário</span>
+      </button>
+
+      <button data-tab="screen-games" class="nav-btn flex flex-col items-center gap-1 p-2 rounded-xl text-dawn-800 hover:text-dawn-950 transition-all cursor-pointer">
+        <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Games</span>
+      </button>
+
+      <button data-tab="screen-calendar" class="nav-btn flex flex-col items-center gap-1 p-2 rounded-xl text-dawn-800 hover:text-dawn-950 transition-all cursor-pointer">
+        <i data-lucide="calendar" class="w-5 h-5"></i>
+        <span class="text-[10px] font-bold">Evolução</span>
+      </button>
+
+      <button data-tab="screen-support" class="nav-btn flex flex-col items-center gap-1 p-2 rounded-xl text-dawn-800 hover:text-dawn-950 transition-all relative cursor-pointer">
+        <span class="absolute top-1 right-2 w-2 h-2 rounded-full bg-dawn-500 animate-ping"></span>
+        <i data-lucide="life-buoy" class="w-5 h-5 text-dawn-900"></i>
+        <span class="text-[10px] font-bold text-dawn-900">Apoio</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- LÓGICA JAVASCRIPT INTEGRADA -->
+  <script>
+    const STORAGE_KEY_MOODS = 'new_dawn_moods';
+    const STORAGE_KEY_JOURNAL = 'new_dawn_journal';
+    const STORAGE_KEY_CONTACTS = 'new_dawn_contacts';
+
+    let currentSelectedMood = null;
+    let selectedEmoji = '☀️';
+
+    // Missões do dia
+    const MISSIONS = [
+      { icon: '💧', title: "Beber um copo d'água bem fresco", desc: "Sinta a água hidratando seu corpo e tire 60 segundos para desacelerar seus pensamentos." },
+      { icon: '🎵', title: "Escutar uma música relaxante", desc: "Coloque os fones de ouvido, feche os olhos e preste atenção apenas nos instrumentos." },
+      { icon: '🚿', title: "Tomar um banho morno e calmo", desc: "Sinta a água levando embora toda a tensão acumulada do seu dia." },
+      { icon: '🚶', title: "Dar uma pequena caminhada", desc: "Caminhe um pouco em casa ou ao ar livre observando 3 objetos de cores diferentes." },
+      { icon: '🧘', title: "Alongar o pescoço e ombros", desc: "Rode os ombros devagar para trás três vezes e solte o ar suavemente." },
+      { icon: '☕', title: "Apreciar uma bebida aconchegante", desc: "Prepare um chá de camomila ou café fresco e sinta o aroma antes de beber." },
+      { icon: '🌱', title: "Olhar para o céu por 2 minutos", desc: "Contemple as nuvens ou o horizonte e lembre-se que cada dia traz um novo recomeço." }
+    ];
+
+    window.onload = function() {
+      lucide.createIcons();
+      initNavigation();
+      initMoodTracker();
+      initDailyMission();
+      initJournal();
+      initGamesSystem();
+      renderCalendar();
+      initSupportArea();
+      initBreathingCycle();
+    };
+
+    function initNavigation() {
+      const navButtons = document.querySelectorAll('.nav-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetTabId = btn.getAttribute('data-tab');
+
+          navButtons.forEach(b => {
+            b.classList.remove('bg-dawn-200', 'text-dawn-950', 'font-extrabold');
+            b.classList.add('text-dawn-800');
+          });
+          btn.classList.add('bg-dawn-200', 'text-dawn-950', 'font-extrabold');
+
+          tabContents.forEach(tab => {
+            tab.classList.toggle('active', tab.id === targetTabId);
+          });
+
+          if(targetTabId === 'screen-calendar') {
+            renderCalendar();
+          }
+        });
+      });
+    }
+
+    function initMoodTracker() {
+      const moodBtns = document.querySelectorAll('.mood-btn');
+      const saveBtn = document.getElementById('save-mood-btn');
+      const moodNote = document.getElementById('mood-note');
+      const savedMsg = document.getElementById('mood-saved-msg');
+
+      moodBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          moodBtns.forEach(b => b.classList.remove('border-dawn-500', 'bg-dawn-200', 'scale-105'));
+          btn.classList.add('border-dawn-500', 'bg-dawn-200', 'scale-105');
+          currentSelectedMood = btn.getAttribute('data-mood');
+          selectedEmoji = btn.getAttribute('data-emoji');
+        });
+      });
+
+      saveBtn.addEventListener('click', () => {
+        if (!currentSelectedMood) {
+          alert("Por favor, selecione como você está se sentindo hoje.");
+          return;
+        }
+
+        const todayStr = new Date().toISOString().split('T')[0];
+        const moodLogs = JSON.parse(localStorage.getItem(STORAGE_KEY_MOODS) || '[]');
+        const updatedLogs = moodLogs.filter(log => log.date !== todayStr);
+        
+        updatedLogs.push({
+          date: todayStr,
+          mood: currentSelectedMood,
+          emoji: selectedEmoji,
+          note: moodNote.value.trim(),
+          timestamp: new Date().getTime()
+        });
+
+        localStorage.setItem(STORAGE_KEY_MOODS, JSON.stringify(updatedLogs));
+
+        savedMsg.classList.remove('hidden');
+        setTimeout(() => savedMsg.classList.add('hidden'), 4000);
+
+        moodNote.value = '';
+        renderCalendar();
+      });
+    }
+
+    function initDailyMission() {
+      const iconEl = document.getElementById('mission-icon');
+      const titleEl = document.getElementById('mission-title');
+      const descEl = document.getElementById('mission-desc');
+      const completeBtn = document.getElementById('complete-mission-btn');
+      const randomBtn = document.getElementById('random-mission-btn');
+      const completeMsg = document.getElementById('mission-complete-msg');
+
+      function getRandomMission() {
+        const m = MISSIONS[Math.floor(Math.random() * MISSIONS.length)];
+        iconEl.textContent = m.icon;
+        titleEl.textContent = m.title;
+        descEl.textContent = m.desc;
+        completeMsg.classList.add('hidden');
+      }
+
+      getRandomMission();
+      randomBtn.addEventListener('click', getRandomMission);
+      completeBtn.addEventListener('click', () => completeMsg.classList.remove('hidden'));
+    }
+
+    function initJournal() {
+      const titleInput = document.getElementById('journal-title');
+      const contentInput = document.getElementById('journal-content');
+      const saveBtn = document.getElementById('save-journal-btn');
+      const journalList = document.getElementById('journal-list');
+      const searchInput = document.getElementById('search-journal');
+
+      function renderJournalEntries(filterText = '') {
+        const entries = JSON.parse(localStorage.getItem(STORAGE_KEY_JOURNAL) || '[]');
+        journalList.innerHTML = '';
+
+        const filtered = entries.filter(e => 
+          (e.title && e.title.toLowerCase().includes(filterText.toLowerCase())) || 
+          e.content.toLowerCase().includes(filterText.toLowerCase())
+        );
+
+        if (filtered.length === 0) {
+          journalList.innerHTML = '<p class="text-center text-xs text-dawn-800/60 py-6">Nenhuma anotação encontrada.</p>';
+          return;
+        }
+
+        filtered.forEach((entry, index) => {
+          const entryDate = new Date(entry.timestamp).toLocaleDateString('pt-BR', {
+            day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+          });
+
+          const card = document.createElement('div');
+          card.className = 'bg-white/90 p-4 rounded-2xl border border-dawn-200 shadow-xs space-y-2 relative';
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-dawn-950 text-sm">${escapeHtml(entry.title || 'Página sem título')}</h4>
+              <button onclick="deleteJournalEntry(${index})" class="text-dawn-800/40 hover:text-red-500 transition-colors p-1" title="Apagar">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <p class="text-[11px] text-dawn-700/70 font-semibold">${entryDate}</p>
+            <p class="text-xs text-dawn-900 leading-relaxed whitespace-pre-wrap">${escapeHtml(entry.content)}</p>
+          `;
+          journalList.appendChild(card);
+        });
+        lucide.createIcons();
+      }
+
+      saveBtn.addEventListener('click', () => {
+        const title = titleInput.value.trim();
+        const content = contentInput.value.trim();
+
+        if (!content) {
+          alert("Escreva uma reflexão antes de salvar.");
+          return;
+        }
+
+        const entries = JSON.parse(localStorage.getItem(STORAGE_KEY_JOURNAL) || '[]');
+        entries.unshift({ title, content, timestamp: Date.now() });
+        localStorage.setItem(STORAGE_KEY_JOURNAL, JSON.stringify(entries));
+
+        titleInput.value = '';
+        contentInput.value = '';
+        renderJournalEntries();
+      });
+
+      searchInput.addEventListener('input', (e) => renderJournalEntries(e.target.value));
+
+      window.deleteJournalEntry = function(idx) {
+        if(confirm("Deseja apagar esta nota?")) {
+          const entries = JSON.parse(localStorage.getItem(STORAGE_KEY_JOURNAL) || '[]');
+          entries.splice(idx, 1);
+          localStorage.setItem(STORAGE_KEY_JOURNAL, JSON.stringify(entries));
+          renderJournalEntries();
+        }
+      };
+
+      renderJournalEntries();
+    }
+
+    function initGamesSystem() {
+      const navBtns = document.querySelectorAll('.game-nav-btn');
+      const gameContainers = document.querySelectorAll('.game-container');
+
+      navBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const gameKey = btn.getAttribute('data-game');
+
+          navBtns.forEach(b => {
+            b.classList.remove('active', 'bg-dawn-400', 'text-dawn-950', 'font-extrabold');
+            b.classList.add('bg-warm-200', 'text-dawn-900');
+          });
+          btn.classList.add('active', 'bg-dawn-400', 'text-dawn-950', 'font-extrabold');
+
+          gameContainers.forEach(container => {
+            container.classList.toggle('hidden', container.id !== `game-view-${gameKey}`);
+          });
+
+          if(gameKey === 'bubbles') {
+            startBubbleCanvas();
+          }
+        });
+      });
+
+      // --- 1. Jogo da Memória Emocional ---
+      initMemoryGame();
+
+      // --- 2. Quebra-Cabeça de Deslizamento ---
+      initSlidingPuzzle();
+
+      // --- 4. Jardim do Alvorecer ---
+      initDawnGarden();
+    }
+
+    /* --- JOGO 1: Memória --- */
+    function initMemoryGame() {
+      const grid = document.getElementById('mem-grid');
+      const movesEl = document.getElementById('mem-moves');
+      const timerEl = document.getElementById('mem-timer');
+      const winMsg = document.getElementById('mem-win-msg');
+      const resetBtn = document.getElementById('reset-mem-btn');
+
+      const symbols = ['☀️', '🌱', '🕊️', '🌸', '🌈', '🌻'];
+      let cards = [];
+      let flipped = [];
+      let moves = 0;
+      let matchedCount = 0;
+      let timer = 0;
+      let interval = null;
+
+      function startMemory() {
+        grid.innerHTML = '';
+        winMsg.classList.add('hidden');
+        moves = 0;
+        matchedCount = 0;
+        timer = 0;
+        movesEl.textContent = '0';
+        timerEl.textContent = '00:00';
+        clearInterval(interval);
+
+        interval = setInterval(() => {
+          timer++;
+          const m = String(Math.floor(timer / 60)).padStart(2, '0');
+          const s = String(timer % 60).padStart(2, '0');
+          timerEl.textContent = `${m}:${s}`;
+        }, 1000);
+
+        cards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+
+        cards.forEach((symbol, idx) => {
+          const card = document.createElement('button');
+          card.className = 'mem-card h-16 rounded-2xl bg-dawn-200 border-2 border-dawn-300 flex items-center justify-center text-2xl font-bold transition-all cursor-pointer shadow-xs';
+          card.dataset.symbol = symbol;
+          card.innerHTML = `<span class="hidden">${symbol}</span><span class="text-dawn-800/40 text-xs">✨</span>`;
+
+          card.addEventListener('click', () => {
+            if (flipped.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
+              card.classList.add('flipped', 'bg-white', 'border-dawn-400');
+              card.children[0].classList.remove('hidden');
+              card.children[1].classList.add('hidden');
+              flipped.push(card);
+
+              if (flipped.length === 2) {
+                moves++;
+                movesEl.textContent = moves;
+
+                if (flipped[0].dataset.symbol === flipped[1].dataset.symbol) {
+                  flipped.forEach(c => c.classList.add('matched', 'bg-emerald-100', 'border-emerald-400'));
+                  flipped = [];
+                  matchedCount += 2;
+                  if (matchedCount === cards.length) {
+                    clearInterval(interval);
+                    winMsg.classList.remove('hidden');
+                  }
+                } else {
+                  setTimeout(() => {
+                    flipped.forEach(c => {
+                      c.classList.remove('flipped', 'bg-white', 'border-dawn-400');
+                      c.children[0].classList.add('hidden');
+                      c.children[1].classList.remove('hidden');
+                    });
+                    flipped = [];
+                  }, 800);
+                }
+              }
+            }
+          });
+          grid.appendChild(card);
+        });
+      }
+
+      resetBtn.addEventListener('click', startMemory);
+      startMemory();
+    }
+
+    /* --- JOGO 2: Quebra-Cabeça de Deslizamento (Sliding Puzzle 3x3) --- */
+    function initSlidingPuzzle() {
+      const board = document.getElementById('puzzle-board');
+      const resetBtn = document.getElementById('reset-puzzle-btn');
+      const winMsg = document.getElementById('puzzle-win-msg');
+
+      // Matriz 3x3 com números 1 a 8 e 0 como espaço em branco
+      let tiles = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+      function renderPuzzle() {
+        board.innerHTML = '';
+        tiles.forEach((tile, index) => {
+          const btn = document.createElement('button');
+          if (tile === 0) {
+            btn.className = 'w-full h-full rounded-xl bg-warm-100/50 border border-dashed border-dawn-300';
+          } else {
+            btn.className = 'w-full h-full rounded-xl bg-gradient-to-tr from-dawn-400 to-dawn-200 text-dawn-950 font-black text-lg flex items-center justify-center shadow-xs border border-dawn-300 transition-all cursor-pointer hover:scale-95';
+            btn.textContent = tile;
+            btn.addEventListener('click', () => moveTile(index));
+          }
+          board.appendChild(btn);
+        });
+      }
+
+      function moveTile(index) {
+        const emptyIdx = tiles.indexOf(0);
+        const validMoves = [index - 1, index + 1, index - 3, index + 3];
+
+        if (validMoves.includes(emptyIdx)) {
+          // Checar limites de linha para evitar teletransporte lateral
+          if ((index % 3 === 0 && emptyIdx === index - 1) || (index % 3 === 2 && emptyIdx === index + 1)) return;
+
+          [tiles[index], tiles[emptyIdx]] = [tiles[emptyIdx], tiles[index]];
+          renderPuzzle();
+          checkPuzzleWin();
+        }
+      }
+
+      function shufflePuzzle() {
+        for (let i = 0; i < 100; i++) {
+          const emptyIdx = tiles.indexOf(0);
+          const neighbors = [];
+          if (emptyIdx % 3 > 0) neighbors.push(emptyIdx - 1);
+          if (emptyIdx % 3 < 2) neighbors.push(emptyIdx + 1);
+          if (emptyIdx >= 3) neighbors.push(emptyIdx - 3);
+          if (emptyIdx < 6) neighbors.push(emptyIdx + 3);
+
+          const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+          [tiles[emptyIdx], tiles[randomNeighbor]] = [tiles[randomNeighbor], tiles[emptyIdx]];
+        }
+        winMsg.classList.add('hidden');
+        renderPuzzle();
+      }
+
+      function checkPuzzleWin() {
+        const winState = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+        if (tiles.every((val, idx) => val === winState[idx])) {
+          winMsg.classList.remove('hidden');
+        }
+      }
+
+      resetBtn.addEventListener('click', shufflePuzzle);
+      shufflePuzzle();
+    }
+
+    /* --- JOGO 3: Canvas de Bolhas Flutuantes (Bubble Pop Sensation) --- */
+    let canvasAnimationId = null;
+    function startBubbleCanvas() {
+      const canvas = document.getElementById('bubble-canvas');
+      const countEl = document.getElementById('bubbles-popped-count');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+
+      let bubbles = [];
+      let poppedCount = 0;
+
+      class Bubble {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.radius = Math.random() * 18 + 14;
+          this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
+          this.y = canvas.height + this.radius;
+          this.speed = Math.random() * 0.8 + 0.4;
+          this.alpha = Math.random() * 0.5 + 0.4;
+          this.color = `hsla(${Math.random() * 40 + 40}, 90%, 65%, ${this.alpha})`;
+        }
+        update() {
+          this.y -= this.speed;
+          if (this.y + this.radius < 0) {
+            this.reset();
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Brilho na bolha
+          ctx.beginPath();
+          ctx.arc(this.x - this.radius * 0.3, this.y - this.radius * 0.3, this.radius * 0.25, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < 15; i++) {
+        const b = new Bubble();
+        b.y = Math.random() * canvas.height;
+        bubbles.push(b);
+      }
+
+      function handlePop(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+        const clickY = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+
+        bubbles.forEach(b => {
+          const dist = Math.hypot(b.x - clickX, b.y - clickY);
+          if (dist < b.radius + 10) {
+            b.reset();
+            poppedCount++;
+            countEl.textContent = poppedCount;
+          }
+        });
+      }
+
+      canvas.onclick = handlePop;
+      canvas.ontouchstart = handlePop;
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        bubbles.forEach(b => {
+          b.update();
+          b.draw();
+        });
+        canvasAnimationId = requestAnimationFrame(animate);
+      }
+
+      if (canvasAnimationId) cancelAnimationFrame(canvasAnimationId);
+      animate();
+    }
+
+    /* --- JOGO 4: Jardim do Alvorecer / Cuide das Flores --- */
+    function initDawnGarden() {
+      const plotsContainer = document.getElementById('garden-plots');
+      const quoteBox = document.getElementById('garden-quote-box');
+
+      const messages = [
+        "A esperança floresce no seu próprio tempo.",
+        "Cada pequeno gesto de autocuidado é como regar sua alma.",
+        "Você está crescendo e se fortalecendo a cada dia.",
+        "Mesmo na tempestade, as raízes continuam firmes.",
+        "Seja paciente com o seu processo de florescer.",
+        "O amanhã sempre traz uma nova luz."
+      ];
+
+      const plotsData = [
+        { state: 'empty' }, { state: 'empty' }, { state: 'empty' },
+        { state: 'empty' }, { state: 'empty' }, { state: 'empty' }
+      ];
+
+      function renderGarden() {
+        plotsContainer.innerHTML = '';
+        plotsData.forEach((plot, idx) => {
+          const card = document.createElement('button');
+          card.className = 'h-24 rounded-2xl bg-warm-100 border-2 border-dawn-200 flex flex-col items-center justify-center gap-1 transition-all hover:border-dawn-400 cursor-pointer shadow-xs';
+
+          if (plot.state === 'empty') {
+            card.innerHTML = `<span class="text-2xl opacity-40">🤎</span><span class="text-[10px] font-bold text-dawn-800">Plantar</span>`;
+          } else if (plot.state === 'seed') {
+            card.innerHTML = `<span class="text-2xl animate-bounce">🌱</span><span class="text-[10px] font-bold text-dawn-800">Regar</span>`;
+          } else if (plot.state === 'flower') {
+            card.innerHTML = `<span class="text-3xl">🌻</span><span class="text-[10px] font-bold text-emerald-800">Floriu!</span>`;
+          }
+
+          card.addEventListener('click', () => {
+            if (plot.state === 'empty') {
+              plot.state = 'seed';
+              quoteBox.textContent = "Semente plantada! Agora clique para regá-la com carinho.";
+            } else if (plot.state === 'seed') {
+              plot.state = 'flower';
+              const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+              quoteBox.textContent = `✨ "${randomMsg}"`;
+            } else {
+              plot.state = 'empty';
+              quoteBox.textContent = "Canteiro pronto para uma nova semente de esperança.";
+            }
+            renderGarden();
+          });
+
+          plotsContainer.appendChild(card);
+        });
+      }
+
+      renderGarden();
+    }
+
+    function renderCalendar() {
+      const monthYearEl = document.getElementById('calendar-month-year');
+      const calendarDaysEl = document.getElementById('calendar-days');
+      const summaryEl = document.getElementById('presence-summary');
+
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentMonth = now.getMonth();
+
+      const monthNames = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+
+      monthYearEl.textContent = `${monthNames[currentMonth]} de ${currentYear}`;
+
+      const moodLogs = JSON.parse(localStorage.getItem(STORAGE_KEY_MOODS) || '[]');
+      const loggedDatesMap = {};
+      moodLogs.forEach(log => {
+        loggedDatesMap[log.date] = log.emoji;
+      });
+
+      const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+      const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      calendarDaysEl.innerHTML = '';
+
+      for (let x = 0; x < firstDayIndex; x++) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'p-2';
+        calendarDaysEl.appendChild(emptyDiv);
+      }
+
+      let activeDaysCount = 0;
+
+      for (let day = 1; day <= totalDays; day++) {
+        const dayFormatted = String(day).padStart(2, '0');
+        const monthFormatted = String(currentMonth + 1).padStart(2, '0');
+        const dateKey = `${currentYear}-${monthFormatted}-${dayFormatted}`;
+
+        const dayCell = document.createElement('div');
+        dayCell.className = 'p-1.5 rounded-2xl flex flex-col items-center justify-center min-h-[42px] transition-all border border-transparent';
+
+        const isToday = (day === now.getDate());
+
+        if (loggedDatesMap[dateKey]) {
+          activeDaysCount++;
+          dayCell.className += ' bg-dawn-200 border-dawn-400 text-dawn-950 font-bold';
+          dayCell.innerHTML = `
+            <span class="text-[9px] text-dawn-800">${day}</span>
+            <span class="text-xs">${loggedDatesMap[dateKey]}</span>
+          `;
+        } else {
+          dayCell.className += isToday ? ' border-dawn-400 bg-warm-100' : ' hover:bg-warm-100 text-dawn-900/60';
+          dayCell.innerHTML = `<span class="text-xs font-bold">${day}</span>`;
+        }
+
+        calendarDaysEl.appendChild(dayCell);
+      }
+
+      summaryEl.innerHTML = `Você esteve presente e cuidou de si em <strong>${activeDaysCount} dia(s)</strong> neste mês. Cada dia conta! ✨`;
+    }
+
+    function initSupportArea() {
+      const form = document.getElementById('add-contact-form');
+      const nameInput = document.getElementById('contact-name');
+      const phoneInput = document.getElementById('contact-phone');
+      const contactsList = document.getElementById('trusted-contacts-list');
+
+      function renderContacts() {
+        const contacts = JSON.parse(localStorage.getItem(STORAGE_KEY_CONTACTS) || '[]');
+        contactsList.innerHTML = '';
+
+        if (contacts.length === 0) {
+          contactsList.innerHTML = '<p class="text-center text-xs text-dawn-800/60 col-span-2 py-4">Nenhum contato de confiança cadastrado ainda.</p>';
+          return;
+        }
+
+        contacts.forEach((contact, index) => {
+          const cleanPhone = contact.phone.replace(/\D/g, '');
+          const card = document.createElement('div');
+          card.className = 'p-3.5 rounded-2xl bg-warm-100 border border-dawn-200 flex items-center justify-between shadow-xs';
+          card.innerHTML = `
+            <div>
+              <h4 class="font-bold text-dawn-950 text-xs sm:text-sm">${escapeHtml(contact.name)}</h4>
+              <p class="text-[11px] text-dawn-800">${escapeHtml(contact.phone)}</p>
+            </div>
+            <div class="flex items-center gap-1">
+              <a href="tel:${cleanPhone}" class="p-2 bg-dawn-300 hover:bg-dawn-400 text-dawn-950 rounded-xl transition-all" title="Ligar">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+              </a>
+              <a href="https://wa.me/55${cleanPhone}" target="_blank" class="p-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 rounded-xl transition-all" title="WhatsApp">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+              </a>
+              <button onclick="deleteContact(${index})" class="p-2 text-dawn-800/40 hover:text-red-500 transition-all" title="Remover">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+          `;
+          contactsList.appendChild(card);
+        });
+        lucide.createIcons();
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+
+        if (name && phone) {
+          const contacts = JSON.parse(localStorage.getItem(STORAGE_KEY_CONTACTS) || '[]');
+          contacts.push({ name, phone });
+          localStorage.setItem(STORAGE_KEY_CONTACTS, JSON.stringify(contacts));
+
+          nameInput.value = '';
+          phoneInput.value = '';
+          renderContacts();
+        }
+      });
+
+      window.deleteContact = function(idx) {
+        const contacts = JSON.parse(localStorage.getItem(STORAGE_KEY_CONTACTS) || '[]');
+        contacts.splice(idx, 1);
+        localStorage.setItem(STORAGE_KEY_CONTACTS, JSON.stringify(contacts));
+        renderContacts();
+      };
+
+      renderContacts();
+
+      // --- Grounding 5-4-3-2-1 ---
+      const groundingSteps = [
+        { num: '5', text: 'Coisas que você consegue VER no seu ambiente agora.' },
+        { num: '4', text: 'Coisas que você consegue TOCAR ou SENTIR ao seu redor.' },
+        { num: '3', text: 'Sons sutis que você consegue OUVIR neste instante.' },
+        { num: '2', text: 'Odores ou aromas que você consegue PERCEBER.' },
+        { num: '1', text: 'Uma qualidade positiva sua que você valoriza.' }
+      ];
+
+      let currentGroundingIndex = 0;
+      const numEl = document.getElementById('grounding-num');
+      const textEl = document.getElementById('grounding-text');
+      const nextBtn = document.getElementById('next-grounding-btn');
+
+      nextBtn.addEventListener('click', () => {
+        currentGroundingIndex = (currentGroundingIndex + 1) % groundingSteps.length;
+        numEl.textContent = groundingSteps[currentGroundingIndex].num;
+        textEl.textContent = groundingSteps[currentGroundingIndex].text;
+      });
+    }
+
+    function initBreathingCycle() {
+      const breathStatus = document.getElementById('breath-status');
+      if (!breathStatus) return;
+
+      const phases = [
+        { text: "Inspire pelo nariz...", duration: 4000 },
+        { text: "Segure o ar...", duration: 7000 },
+        { text: "Solte o ar pela boca...", duration: 8000 }
+      ];
+
+      let phaseIdx = 0;
+
+      function updateBreathText() {
+        if (breathStatus) {
+          breathStatus.textContent = phases[phaseIdx].text;
+          const duration = phases[phaseIdx].duration;
+          phaseIdx = (phaseIdx + 1) % phases.length;
+          setTimeout(updateBreathText, duration);
+        }
+      }
+
+      updateBreathText();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
